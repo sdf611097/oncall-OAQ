@@ -4,15 +4,20 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "ct-promised-mongo": "^1.0.1",
     "express": "^4.13.4"
   },
   "devDependencies": {
     "chai": "^3.5.0",
     "mocha": "^2.5.3",
+    "mongodb-runner": "^3.3.2",
     "request": "^2.72.0"
   },
   "scripts": {
-    "test": "./node_modules/.bin/mocha ./test/test.js"
+    "pretest": "./node_modules/.bin/mongodb-runner start",
+    "test": "./node_modules/.bin/mocha ./test/test.js",
+    "posttest": "./node_modules/.bin/mongodb-runner stop"
+
   },
   "repository": {
     "type": "git",

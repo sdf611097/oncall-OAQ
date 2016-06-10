@@ -46,3 +46,49 @@ describe('simple tests', function(){
 
   });
 });
+
+describe("db ops", function(){
+  let db = require('../databaseAdapter.js')("mongodb://localhost:27017/dev");
+  let user1 = {email:"test@test.com",name:"name",phone:"0123456789"};
+  let user2 = {email:"test2@test.com",name:"name2",phone:"0123456789"};
+
+  it('insert', function(done){
+    return db.insert([user1, user2])
+    .then(()=>done());
+  });
+
+  it('find', function(done){
+    db.find(user1.email)
+    .then(user=>{
+      expect(user.name).to.equal(user1.name);
+      return db.find("notexist@test.com");
+    })
+    .then(user=>{
+      expect(user).to.not.be.ok;
+      done();
+    }).catch(err=>{
+      if(err) done(err);
+      else done(new Error("something wrong"));
+    });
+  });
+
+  it('delete', function(done){
+    db.delete(user1.email)
+    .then(result=>{
+      expect(result.deletedCount).to.equal(1);
+      return db.delete(user2.email);
+    })
+    .then(result=>{
+      expect(result.deletedCount).to.equal(1);
+      return db.delete("notexist@test.com");
+    })
+    .then(result=>{
+      expect(result.deletedCount).to.equal(0);
+      done();
+    }).catch(err=>{
+      if(err) done(err);
+      else done(new Error("something wrong"));
+    });
+  });
+
+});

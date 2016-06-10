@@ -1,5 +1,8 @@
-var express = require('express');
-var app = express();
+'use strict';
+const express = require('express');
+const app = express();
+const db = require('./databaseAdapter.js');
+
 
 app.get('/', function (req, res) {
   res.send('Hello World!');
@@ -10,6 +13,8 @@ app.listen(3000, function () {
 });
 
 app.post('/users', function (req, res) {
+  console.log('body',req.body);
+  //db.insert(req.body);
   res.send('not implement yet');
 });
 
@@ -26,3 +31,6 @@ app.post('/functions/:fun', function (req, res) {
   console.log('fun',req.params.fun);
   res.send('not implement yet');
 });
+
+
+//ToDo: gracefull shutdown, catch exceptions
