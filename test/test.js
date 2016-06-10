@@ -1,6 +1,7 @@
 'use strict';
 const expect = require('chai').expect;
 const request = require('request');
+const fs = require('fs');
 //start app
 require('../index.js');
 
@@ -91,4 +92,23 @@ describe("db ops", function(){
     });
   });
 
+});
+
+describe('notify hooks', function(){
+  it('email', function(done){
+    const fileStr = fs.readFileSync('./test/config.json', 'utf8');
+    const config = JSON.parse(fileStr);
+    if(!config.sendgrid) {
+      done(new Error("no email keys"));
+    }
+    const emailSender = require('../emailAdapter.js')(config.sendgrid);
+    emailSender.send(config.testerEmail)
+    .then(result=>{
+      expect(result.message).equal.to('success');
+      done();
+    })
+    .catch(err=>{
+      done(err);
+    });
+  });
 });

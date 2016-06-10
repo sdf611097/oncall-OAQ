@@ -5,7 +5,8 @@
   "main": "index.js",
   "dependencies": {
     "ct-promised-mongo": "^1.0.1",
-    "express": "^4.13.4"
+    "express": "^4.13.4",
+    "sendgrid": "^2.0.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
@@ -17,7 +18,6 @@
     "pretest": "./node_modules/.bin/mongodb-runner start",
     "test": "./node_modules/.bin/mocha ./test/test.js",
     "posttest": "./node_modules/.bin/mongodb-runner stop"
-
   },
   "repository": {
     "type": "git",

@@ -29,6 +29,7 @@ app.delete('/users/:id', function (req, res) {
 
 app.post('/functions/:fun', function (req, res) {
   console.log('fun',req.params.fun);
+  //wait for complete or response directly
   res.send('not implement yet');
 });
 
