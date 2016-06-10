@@ -104,7 +104,7 @@ describe('notify hooks', function(){
     const emailSender = require('../emailAdapter.js')(config.sendgrid);
     emailSender.send(config.testerEmail)
     .then(result=>{
-      expect(result.message).equal.to('success');
+      expect(result.message).to.equal('success');
       done();
     })
     .catch(err=>{
