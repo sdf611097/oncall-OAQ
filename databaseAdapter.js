@@ -26,27 +26,23 @@ function insertMulti(list){
   }
 }
 
-function findOne(email){
-  if(email.indexOf('@')>-1){
-    return mongo.findOne("User", {email:email});
-  }else {
-    return Promise.reject(new Error("not an email"));
-  }
+function findOne(query){
+  //ToDo, multi fit, random choose one
+  return mongo.findOne("User", query);
 }
 
-function deleteMany(email){
-  return mongo.deleteMany("User", {email:email});
+function deleteMany(query){
+  return mongo.deleteMany("User", query);
 }
 
 module.exports = function(uri){
-  console.log('uri??', uri);
   mongo.getConnectPromise(uri)
   .then(db=>{
-    console.log('db is connected');
+    console.log(uri, 'db is connected');
 
   })
   .catch(err=>{
-    console.log('connection fail');
+    console.log(uri, 'connection fail');
     //ToDo deal with connect failed case
     process.exit(1);
   });

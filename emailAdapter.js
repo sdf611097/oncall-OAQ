@@ -8,7 +8,7 @@ function sendEmail(toUserEmail){
       to: toUserEmail,
       from: 'oncall-OAQ',
       subject: 'This is subject',
-      text: 'Dear poor guy:\n \tOAQ\n BR.\n Boss'
+      text: 'Dear poor guy:\n \tOAQ\n B.R.\n Boss'
     });
     sendgrid.send(email, function(err, json){
       if(err) {
