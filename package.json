@@ -17,7 +17,8 @@
   "scripts": {
     "pretest": "./node_modules/.bin/mongodb-runner start",
     "test": "./node_modules/.bin/mocha ./test/test.js",
-    "posttest": "./node_modules/.bin/mongodb-runner stop"
+    "posttest": "./node_modules/.bin/mongodb-runner stop",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
